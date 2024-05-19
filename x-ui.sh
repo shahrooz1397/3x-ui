@@ -21,7 +21,7 @@ function LOGI() {
 # check root
 [[ $EUID -ne 0 ]] && LOGE "ERROR: You must be root to run this script! \n" && exit 1
 
-#!/bin/bash
+
 
 # Check OS and set release variable
 if [[ -f /etc/os-release ]]; then
