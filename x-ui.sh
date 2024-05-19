@@ -21,6 +21,8 @@ function LOGI() {
 # check root
 [[ $EUID -ne 0 ]] && LOGE "ERROR: You must be root to run this script! \n" && exit 1
 
+#!/bin/bash
+
 # Check OS and set release variable
 if [[ -f /etc/os-release ]]; then
     source /etc/os-release
@@ -76,6 +78,10 @@ elif [[ "${release}" == "oracle" ]]; then
     if [[ ${os_version} -lt 8 ]]; then
         echo -e "${red} Please use Oracle Linux 8 or higher ${plain}\n" && exit 1
     fi
+elif [[ "${release}" == "alpine" ]]; then
+    if [[ ${os_version} -lt 3 ]]; then
+        echo -e "${red} Please use Alpine Linux 3 or higher ${plain}\n" && exit 1
+    fi
 else
     echo -e "${red}Your operating system is not supported by this script.${plain}\n"
     echo "Please ensure you are using one of the following supported operating systems:"
@@ -91,9 +97,11 @@ else
     echo "- Rocky Linux 9+"
     echo "- Oracle Linux 8+"
     echo "- OpenSUSE Tumbleweed"
+    echo "- Alpine Linux 3+"
     exit 1
 
 fi
+
 
 # Declare Variables
 log_folder="${XUI_LOG_FOLDER:=/var/log}"
